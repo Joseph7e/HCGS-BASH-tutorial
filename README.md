@@ -3,6 +3,10 @@ Commmonly used commands for working in the command line environment
 
 **This site will be continuously updated throughout the week.**
 
+
+### Secure SHell (SSH)
+SSH is a method of securely communicating with another computer.
+
 ![alt text](https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2017/07/symmetric-encryption-ssh-tutorial.jpg)
 
 ### The Servers at UNH
