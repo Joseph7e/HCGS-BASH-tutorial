@@ -6,7 +6,7 @@ Commmonly used commands for working in the command line environment
 ![alt text](https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2017/07/symmetric-encryption-ssh-tutorial.jpg)
 
 
-![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/UNH_servers.png?raw=true)
+![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/UNH_servers2.png?raw=true)
 
 ### Connecting to the server
 
@@ -18,8 +18,11 @@ Commmonly used commands for working in the command line environment
 [Download CyberDuck](https://cyberduck.io/download/)
 
 Alternative Tools:
+
 Filezilla - https://filezilla-project.org/
+
 WinSCP - https://winscp.net/eng/index.php
+
 scp - for non-windows users. https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/
 
 
