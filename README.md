@@ -17,7 +17,7 @@ SSH is a method of securely communicating with another computer.
 
 [Download putty](https://www.putty.org/)
 
-![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/Putty.png?raw=true)
+![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/Putty.PNG?raw=true)
 
 ### Transferring files
 
