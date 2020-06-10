@@ -1,25 +1,24 @@
 # HCGS-BASH-primers
 Commmonly used commands for working in the command line environment
 
+**This site will be continuously updated throughout the week.**
+
+![alt text](https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2017/07/symmetric-encryption-ssh-tutorial.jpg)
 
 
 ### Connecting to the server
 
-![alt text](https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2017/07/symmetric-encryption-ssh-tutorial.jpg)
-
-**This site will be continuously updated throughout the week.**
-
+[Download putty](https://www.putty.org/)
 
 
 ### Transferring files
 
 [Download CyberDuck](https://cyberduck.io/download/)
 
-
-
-
-
-
+Alternative Tools:
+Filezilla - https://filezilla-project.org/
+WinSCP - https://winscp.net/eng/index.php
+scp - for non-windows users. https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/
 
 
 
