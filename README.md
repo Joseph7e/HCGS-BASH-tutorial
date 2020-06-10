@@ -25,11 +25,11 @@ SSH is a method of securely communicating with another computer.
 
 Alternative Tools:
 
-Filezilla - https://filezilla-project.org/
+  1. Filezilla - https://filezilla-project.org/
 
-WinSCP - https://winscp.net/eng/index.php
+  2. WinSCP - https://winscp.net/eng/index.php
 
-scp - for non-windows users. https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/
+  3. scp - for non-windows users. https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/
 
 
 
