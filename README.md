@@ -5,6 +5,7 @@ Commmonly used commands for working in the command line environment
 
 ![alt text](https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2017/07/symmetric-encryption-ssh-tutorial.jpg)
 
+### The Servers at UNH
 
 ![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/UNH_servers2.png?raw=true)
 
