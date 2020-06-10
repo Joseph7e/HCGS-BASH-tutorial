@@ -6,6 +6,8 @@ Commmonly used commands for working in the command line environment
 ![alt text](https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2017/07/symmetric-encryption-ssh-tutorial.jpg)
 
 
+![alt text](https://github.com/joseph7e/[reponame]/blob/[branch]/image.jpg?raw=true)
+
 ### Connecting to the server
 
 [Download putty](https://www.putty.org/)
