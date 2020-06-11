@@ -30,3 +30,31 @@ Alternative Tools:
   * WinSCP - https://winscp.net/eng/index.php
 
   * scp - for non-windows users. https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/
+
+### Common bash commands
+
+[NH INBRE Bioinformatics tutorials](http://nhinbre.org/bioinformatics-modules/)
+
+Anatomy of a Command
+
+Finding Help
+
+Paths and Directories
+
+Moving About
+
+Move, Copy and Delete
+
+Opening and editing files
+
+grep
+
+Pipes and redirecting
+
+Globbing and Wildcards
+
+nohup
+
+top
+
+
