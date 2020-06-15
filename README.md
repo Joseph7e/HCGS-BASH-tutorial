@@ -120,11 +120,11 @@ The **move** command - mv
 
 The **copy** command - cp
 
-  + cp fil> destination
+  + cp \<file> \<destination>
 
 The **remove** command - rm
 
-  + rm file
+  + rm \<file>
 
 ```bash
 # make a new directory
