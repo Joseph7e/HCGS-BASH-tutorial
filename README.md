@@ -108,7 +108,7 @@ cd ../../
 Don't forget to autocomplete with the *tab* key. This will make you more efficient and less prone to mistakes.
 
 
-### Make Directories, Move, Copy and Remove
+## Make Directories, Move, Copy and Remove
 
 The **make directory** command - mkdir
 
