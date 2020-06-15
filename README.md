@@ -35,11 +35,11 @@ Alternative Tools:
 
 [NH INBRE Bioinformatics tutorials](http://nhinbre.org/bioinformatics-modules/)
 
-### Anatomy of a Command
+## Anatomy of a Command
 
 ![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/anatomy.png?raw=true)
 
-### Finding Help
+## Finding Help
 
 ```bash
 # use the help option
@@ -52,9 +52,10 @@ man command
 whatis command
 
 ```
-Also, google and us!
 
-### Paths and Directories
+Also try **Google** and/or email Devin/Joe
+
+## Paths and Directories
 
 Absolute paths always start at the **root** directory of the server - '/'
   + ex.) /home/genome/joseph7e
@@ -92,7 +93,7 @@ ls ../../
 
 ```
 
-### Moving About
+## Moving About
 
 The **change directory** command - cd
 
@@ -147,7 +148,7 @@ rm -r my_directory/
 ```
 
 
-### Opening and editing files
+## Opening and editing files
 
 There are a lot of commands to open files. The one you choose depends on what you want to do.
 
@@ -172,7 +173,7 @@ https://wiki.gentoo.org/wiki/Nano/Basics_Guide
 nano file.txt
 
 ```
-### Searching through a file
+## Searching through a file
 
 **grep** is a tool that allows you to search through a file for a specified string. For example if you wanted to find your name in a roster.
 
