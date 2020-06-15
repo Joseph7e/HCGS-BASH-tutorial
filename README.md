@@ -112,19 +112,19 @@ Don't forget to autocomplete with the *tab* key. This will make you more efficie
 
 The **make directory** command - mkdir
 
-  + mkdir <directory_name>
+  + mkdir directory_name
 
 The **move** command - mv
 
-  + mv <file> <destination>
+  + mv file destination
 
 The **copy** command - cp
 
-  + cp <file> <destination>
+  + cp fil> destination
 
 The **remove** command - rm
 
-  + rm <file>
+  + rm file
 
 ```bash
 # make a new directory
