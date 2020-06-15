@@ -73,7 +73,7 @@ Relative paths are **relative** to where you are currently located.
   + ~/ means your home directory
 
 
-The **print working directory** command tells you the abolsute path to where yoy currently are.
+The **print working directory** command tells you the abolsute path to where you currently are.
 
 ```bash
 pwd
