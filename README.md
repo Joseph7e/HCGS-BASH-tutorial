@@ -31,32 +31,37 @@ Alternative Tools:
 
   * scp - for non-windows users. https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/
 
-### Common bash commands
+# Common bash commands
 
 [NH INBRE Bioinformatics tutorials](http://nhinbre.org/bioinformatics-modules/)
 
-Anatomy of a Command
+### Anatomy of a Command
 
 ![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/anatomy.png?raw=true)
 
-Finding Help
+### Finding Help
 
-Paths and Directories
+```bash
+# use the help option
+command -help
 
-Moving About
+# check the commands manual
+man command
 
-Move, Copy and Delete
+# get a short description
+whatis command
 
-Opening and editing files
+```
+Also, google and us!
 
-grep
+### Paths and Directories
 
-Pipes and redirecting
+### Moving About
 
-Globbing and Wildcards
+### Move, Copy and Delete
 
-nohup
+### Opening and editing files
 
-top
+### grep
 
 
