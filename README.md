@@ -56,7 +56,38 @@ Also, google and us!
 
 ### Paths and Directories
 
+absolute paths always start at the *root* directory of the server - '/'
+ex.) /home/genome/joseph7e
+
+relative paths are *relative* to where you are currently located.
+ex.) ../genome/devin/
+
+
+*special characters*
+
+../ means up one level
+./ means your current directory
+~/ means your home directory
+
+The *list dircetory* command - ls
+
+```bash
+# list the contents of 
+
+
+```
+
 ### Moving About
+
+The *change directory* command - cd
+
+```
+# change directory 
+cd /home/genome/joseph7e
+
+cd ../../
+
+```
 
 ### Move, Copy and Delete
 
