@@ -72,7 +72,13 @@ Relative paths are **relative** to where you are currently located.
   + ~/ means your home directory
 
 
-The **list dircetory** command - ls
+The **print working directory** command tells you the abolsute path to where yoy currently are.
+
+```bash
+pwd
+```
+
+The **list directory** command - ls
 
 ```bash
 # list the contents of your home directory, from anywhere
