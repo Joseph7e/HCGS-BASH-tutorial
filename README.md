@@ -37,6 +37,8 @@ Alternative Tools:
 
 Anatomy of a Command
 
+![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/anatomy.png?raw=true)
+
 Finding Help
 
 Paths and Directories
