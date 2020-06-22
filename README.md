@@ -181,6 +181,9 @@ nano file.txt
 
 grep "my search string" file.txt
 
+# have a zipped file?
+zgrep "my search string" file.txt.gz
+
 ```
 
 
