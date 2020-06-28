@@ -35,6 +35,11 @@ Alternative Tools:
 
 [NH INBRE Bioinformatics tutorials](http://nhinbre.org/bioinformatics-modules/)
 
+Itching for more? Try this 
+
+[In depth guide on BASH](https://guide.bash.academy/)
+
+
 ## Anatomy of a Command
 
 ![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/anatomy.png?raw=true)
