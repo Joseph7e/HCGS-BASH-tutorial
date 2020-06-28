@@ -35,30 +35,63 @@ Alternative Tools:
 
 [NH INBRE Bioinformatics tutorials](http://nhinbre.org/bioinformatics-modules/)
 
-Itching for more? Try this 
-
-[In depth guide on BASH](https://guide.bash.academy/)
+Itching for more? Try this [In depth guide on BASH](https://guide.bash.academy/)
 
 
 ## Anatomy of a Command
 
 ![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/anatomy.png?raw=true)
 
+
+## General Notes
+
+    Spaces are important. They delineate **command**, **arguments** and **options**. 
+
+    Spelling and case sensitvity is important.
+
+    Tab complete! This will help with the two points above and save you a ton of time. 
+
+A lot of errors you get on the command line are because you are not using autocomplete. If a file exists path exists and the command doesn't autocomplete it means you have a mistake with something above.
+
+
+```bash
+
+# A simple example using the command 'echo'. echo prints whatever you put as an argument to the terminal.
+echo "Hello World!"
+
+# a simple example with the command 'cal'. cal displays the calender.
+cal
+
+# adding an option to 'cal' to remove the date highlight.
+cal -h
+
+```
+
 ## Finding Help
 
 ```bash
-# use the help option
-command -help
+# use the help option, this can vary command to command, sometimes its '-h' or '-help'
+cal --help
 
 # check the commands manual
-man command
+man cal
 
 # get a short description
-whatis command
+whatis cal
 
 ```
 
 Also try **Google** and/or email Devin/Joe
+
+
+
+
+
+
+
+
+
+
 
 ## Paths and Directories
 
@@ -188,6 +221,12 @@ grep "my search string" file.txt
 
 # have a zipped file?
 zgrep "my search string" file.txt.gz
+
+# count the number of lines that contain the search string.
+grep -c "my search string" file.txt
+
+# diplay the lines that don't contain the search term.
+grep -v "my search string" file.txt
 
 ```
 
