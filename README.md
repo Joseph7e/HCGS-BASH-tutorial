@@ -2,7 +2,7 @@
 Commmonly used commands for working in the command line environment
 
 **This site will be continuously updated throughout the week.**
-
+!img(url=
 
 ### Secure Shell (SSH)
 SSH is a method of securely communicating with another computer.
@@ -12,6 +12,7 @@ SSH is a method of securely communicating with another computer.
 ### The Servers at UNH
 
 ![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/UNH_servers2.png?raw=true)
+
 
 ### Connecting to the server
 
@@ -82,14 +83,6 @@ whatis cal
 ```
 
 Also try **Google** and/or email Devin/Joe
-
-
-
-
-
-
-
-
 
 
 
@@ -213,7 +206,7 @@ nano file.txt
 ```
 ## Searching through a file
 
-**grep** is a tool that allows you to search through a file for a specified string. For example if you wanted to find your name in a roster.
+**grep** is a tool that allows you to search through a file for a specified string. With default settings grep will print all lines from a file that contain the exact string that was searched.
 
 ```bash
 
