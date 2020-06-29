@@ -46,11 +46,11 @@ Itching for more? Try this [In depth guide on BASH](https://guide.bash.academy/)
 
 ## General Notes
 
-    Spaces are important. They delineate **command**, **arguments** and **options**. 
+  Spaces are important. They delineate **command**, **arguments** and **options**. 
 
-    Spelling and case sensitvity is important.
-
-    Tab complete! This will help with the two points above and save you a ton of time. 
+  Spelling and case sensitvity is important.
+ 
+   Tab complete! This will help with the two points above and save you a ton of time. 
 
 A lot of errors you get on the command line are because you are not using autocomplete. If a file exists path exists and the command doesn't autocomplete it means you have a mistake with something above.
 
