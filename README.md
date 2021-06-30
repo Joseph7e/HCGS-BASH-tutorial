@@ -224,6 +224,169 @@ grep -v "my search string" file.txt
 ```
 
 
+# RepeatFS
+Manuscript title  - RepeatFS: a file system providing reproducibility through provenance and automation
+Github page - https://github.com/ToniWestbrook/repeatfs
+
+USAGE
+--
+RepeatFS functions as a transparent layer between you and your files, recording all IO activity. In order to use RepeatFS, you'll mount the target directory you want to monitor (which includes subdirectories and files).  Then, anytime you wish to access any files within the monitored directory, you'll instead use the path to the RepeatFS mount.
+
+
+**Create a configuration file**
+```
+repeatfs generate
+less -S ~/.repeatfs/repeatfs.conf
+```
+
+**Mount and monitor a directory**:
+Usage: repeatfs mount <directory to monitor> <RepeatFS mount directory>  
+ 
+```
+# Create a directory to store the analyses files
+mkdir ~/repeatfs-analysis
+ 
+# make a directory to store the repeatfs mount
+mkdir ~/repeatfs-mnt
+
+# mount the directory 
+repeatfs mount ~/repeatfs-analysis ~/repeatfs-mnt
+cd ~/repeatfs-mnt
+
+# download some data
+wget "https://ftp.ncbi.nlm.nih.gov/refseq/release/mitochondrion/mitochondrion.1.1.genomic.fna.gz"
+gunzip *.gz 
+```
+
+
+Provenance
+--
+The most powerful feature of RepeatFS is the ability to record provenance and replicate the creation of the file on a different system.  To ensure all operations are successfully recorded, be sure to perform the entirety of your analysis using a RepeatFS mount. 
+
+```
+ls ~/repeatfs-mnt/mitochondrion.1.1.genomic.fna+/
+```
+
+**Path to a file's provenance record** - this is a VDF, and is populated automatically when accessed, and may be copied to any location.  Note the plus sign next to the file name below - all VDFs are available using a plus sign next to the filename:
+ 
+**Path to a file's provenance graph** - like the provenance record, this is also a VDF.  RepeatFS visualizes provenance by generating an HTML file that can be vieweed in any browser:
+
+ 
+ Do some work
+ --
+
+```
+# pull out a single entry of the genome
+
+ 
+ 
+```
+ 
+ Examine the provenance graph of the final file
+ --
+ 
+ ```
+# to copy this file using an ssh gui (like cyberduck) you'll need to create a copy and put it in a non VDF difrectory
+cp ~/~/mnt/file.txt+/file.txt.provenance.html
+```
+ 
+
+
+
+![Example 1](https://raw.githubusercontent.com/ToniWestbrook/repeatfs/master/images/example1.png) 
+
+ 
+ 
+Replication
+--
+ 
+**Replicate a file** (replication destination must be within an active RepeatFS mount:
+
+```
+repeatfs replicate -r <replication destination> <provenance file>
+```
+
+RepeatFS can also replicate these steps to recreate `results.tar` using the `results.tar.provenance.json` file.  You can use this file (or distribute it to others) to reproduce your work.  In the following example, we've copied the provenance record into our home directory.  We then mount a directory with RepeatFS and replicate the work (and save stdout and stderr into log files):
+
+```
+repeatfs mount ~/replicate ~/mnt
+cd ~/mnt
+
+repeatfs replicate ~/results.txt.provenance.json --stdout stdout.log --stderr stderr.log
+```
+
+RepeatFS will execute and verify each step. Version mismatches or other errors will be reported:
+
+RepeatFS can also simply list the commands that would be used during replication (using the `-l` argument):
+
+```
+repeatfs replicate ~/results.txt.provenance.json -l
+```
+
+This will list each command that will be run, in order.  It will also list ID(s) next to each command, which can be used during replication (using the `-e` argument) to reconstruct a missing shell script.
+
+```
+[turing|1591668563.97|1652] wget ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
+[turing|1591668614.24|1695] gzip -d uniprot_sprot.fasta.gz
+[turing|1591668694.23|1756] grep --color=auto > uniprot_sprot.fasta > /tmp/mnt/headers.txt
+[turing|1591669111.77|2165, turing|1591669111.77|2166] cat uniprot_sprot.fasta | wc -l > /tmp/mnt/count.txt
+[turing|1591669123.5|2175] tar -cvf results.tar headers.txt count.txt
+```
+
+VIRTUAL DYNAMIC FILES
+--
+Provenance and replication are only a part of RepeatFS's capabilities.  RepeatFS can also automate commonly performed tasks using VDFs. VDFs are special files that represent the output of some operation, such as converting file formats, extracting text, indexing a reference, etc.  Whenver RepeatFS detects a file that is a valid input for one of these types of operations, it will also show a corresponding output file.  When this output file is accessed (opened, copied, read), RepeatFS will automatically run the program necessary to perform the action, and populate the output file in realtime.  These VDFs look and act just like normal files, though they are stored in memory.  VDFs may be converted into normal files simply by copying them to another directory.
+
+VDFs are configured within the RepeatFS configuration file as follows:
+
+```
+# Comments start with #
+# The following entry creates a VDF that shows a corresponding FASTA for any FASTQ.
+# Accessing the FASTA will automatically run seqtk
+
+[entry]                   # Each VDF entry starts with [entry]
+match=\.fastq$            # This regular expression controls which files are valid input
+ext=.fasta                # This extension will be appended to the end of the VDF
+cmd=seqtk seq -A {input}  # This is the command that will be run when accessing the VDF
+```
+
+All VDF files, including system-provided ones like provenance, or user-defined ones like the FASTQ->FASTA example above, can be found by placing a plus sign `+` after the input filename.  So if we had a FASTQ file located at `~/mnt/example.fastq`, listing the contents of `~/mnt/example.fastq+` would show the following files:
+
+```
+example.fastq.fasta
+example.fastq.provenance.html
+example.fastq.provenance.json
+```
+
+Note that since VDFs are treated as normal files, they also can be used as inputs to other VDFs.  In this way, multiple VDFs can be chained together to perform automated operations in a modular fashion.  Using the above example, if we define the following VDF:
+
+```
+[entry]
+match=.*
+ext=.count
+cmd=wc -l {input}
+```
+
+This would create a corresponding `.count` for every file in the RepeatFS mount, containing the number of lines the original file contained (even if that original file was a VDF).  In this way, we can view the number of lines in a FASTA converted from the FASTQ file above:
+
+```
+less ~/mnt/example.fastq+/example.fastq.fasta+/example.fastq.fasta.count
+```
+
+While VDFs are not required to record provenance in RepeatFS, they do represent a powerful tool to aid in improving reproducibilty by performing common tasks in a uniform, documented fashion.
+
+ 
+**Stop monitoring a directory**:
+Once you stop monitoring a directory you will lose the provenance and json file. Make a copy of them if you want to keep them.
+```
+#fusermount -u <RepeatFS mount directory>
+fusermount -u ~/repeatfs-mnt
+```
+ 
+QUESTIONS
+--
+RepeatFS is actively being developed and improved all the time.  If you encounter any issue at all, please don't hesitate to reach out and file a bug report here: https://github.com/ToniWestbrook/repeatfs/issues
+
 
 
 
