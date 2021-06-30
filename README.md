@@ -290,6 +290,11 @@ extract_sequences "Melibe leonina" mitochondrion.1.1.genomic.fna > melibe-genome
  # pull out the COX1 gene
  
  
+ # download another genome
+ 
+ 
+ # pull out the cox1 gene
+ 
  
 ```
  
