@@ -282,7 +282,13 @@ ls ~/repeatfs-mnt/mitochondrion.1.1.genomic.fna+/
 
 ```
 # pull out a single entry of the genome
+extract_sequences "Melibe leonina" mitochondrion.1.1.genomic.fna > melibe-genome.fasta
 
+ # annotate the genome
+ prokka --kingdom Mitochondria --gcode 5 -o prokka-results
+ 
+ # pull out the COX1 gene
+ 
  
  
 ```
