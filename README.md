@@ -250,17 +250,18 @@ Usage: repeatfs mount <directory to monitor> <RepeatFS mount directory>
 ```
 # Create a directory to store the analyses files
 mkdir ~/repeatfs-analysis
- 
+
 # make a directory to store the repeatfs mount
-mkdir ~/repeatfs-mnt
+mkdir ~/mnt
 
 # mount the directory 
-repeatfs mount ~/repeatfs-analysis ~/repeatfs-mnt
-cd ~/repeatfs-mnt
+repeatfs mount ~/repeatfs-analysis ~/mnt
+cd ~/mnt
 
 # download some data
-wget "https://ftp.ncbi.nlm.nih.gov/refseq/release/mitochondrion/mitochondrion.1.1.genomic.fna.gz"
-gunzip *.gz 
+wget "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/188/955/GCF_001188955.3_ASM118895v3/GCF_001188955.3_ASM118895v3_genomic.fna.gz"
+gunzip *.gz  
+
 ```
 
 
@@ -269,7 +270,7 @@ Provenance
 The most powerful feature of RepeatFS is the ability to record provenance and replicate the creation of the file on a different system.  To ensure all operations are successfully recorded, be sure to perform the entirety of your analysis using a RepeatFS mount. 
 
 ```
-ls ~/repeatfs-mnt/mitochondrion.1.1.genomic.fna+/
+ls ~/mnt/GCF_001188955.3_ASM118895v3_genomic.fna+/
 ```
 
 **Path to a file's provenance record** - this is a VDF, and is populated automatically when accessed, and may be copied to any location.  Note the plus sign next to the file name below - all VDFs are available using a plus sign next to the filename:
@@ -281,33 +282,42 @@ ls ~/repeatfs-mnt/mitochondrion.1.1.genomic.fna+/
  --
 
 ```
-# pull out a single entry of the genome
-extract_sequences "Melibe leonina" mitochondrion.1.1.genomic.fna > melibe-genome.fasta
+# annotate the genome
+prokka --noanno --notrna --fast GCF_001188955.3_ASM118895v3_genomic.fna -o prokka-results
 
- # annotate the genome
- prokka --kingdom Mitochondria --gcode 5 -o prokka-results
+# pull out the 16S rRNA sequence from the genome
+extract_sequences "BOACGFBO_08208 16S ribosomal RNA" prokka-results/*.ffn > Kitasatospora_aureofaciens_16S.fasta
+
+# download another genome
+wget "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/569/385/GCF_009569385.1_ASM956938v1/GCF_009569385.1_ASM956938v1_genomic.fna.gz"
+gunzip GCF_009569385.1_ASM956938v1_genomic.fna.gz
  
- # pull out the COX1 gene
+# annotate and pull out the 16S sequence
+prokka --noanno --notrna --fast GCF_009569385.1_ASM956938v1_genomic.fna -o prokka-results-2
+extract_sequences "DJKNPNDI_01625 16S ribosomal RNA" prokka-results-2/*.ffn > Streptomyces_kaniharaensis_16S.fasta
+
+# combine the sequences and run an alignment
+cat Kitasatospora_aureofaciens_16S.fasta Streptomyces_kaniharaensis_16S.fasta > combined-16S.fasta
+muscle -in combined-16S.fasta -out combined-16S.clw -clw
+mafft --distout --reorder --anysymbol --nomemsave --thread 18 combined-16S.fasta 1> combined-alignment.fasta 2> combined-alignment.fasta.log
  
- 
- # download another genome
- 
- 
- # pull out the cox1 gene
- 
- 
+# pull out the distance
+tail -n 1 combined-16S.fasta.hat2 > distance.txt
+cat distance.txt
 ```
  
  Examine the provenance graph of the final file
  --
  
  ```
+ls combined-16S.fasta+ 
+ 
 # to copy this file using an ssh gui (like cyberduck) you'll need to create a copy and put it in a non VDF difrectory
-cp ~/~/mnt/file.txt+/file.txt.provenance.html
+cp ~/mnt/combined-16S.fasta+/combined-16S.fasta.provenance.html ~/
+cp ~/mnt/combined-16S.fasta+/combined-16S.fasta.provenance.json ~/
+ 
 ```
  
-
-
 
 ![Example 1](https://raw.githubusercontent.com/ToniWestbrook/repeatfs/master/images/example1.png) 
 
@@ -322,32 +332,32 @@ Replication
 repeatfs replicate -r <replication destination> <provenance file>
 ```
 
-RepeatFS can also replicate these steps to recreate `results.tar` using the `results.tar.provenance.json` file.  You can use this file (or distribute it to others) to reproduce your work.  In the following example, we've copied the provenance record into our home directory.  We then mount a directory with RepeatFS and replicate the work (and save stdout and stderr into log files):
+RepeatFS can also replicate these steps to recreate `combined-16S.fasta` using the `combined-16S.fasta.provenance.json` file.  You can use this file (or distribute it to others) to reproduce your work.  In the following example, we've copied the provenance record into our home directory.  We then mount a directory with RepeatFS and replicate the work (and save stdout and stderr into log files):
 
 ```
+cd
+mkdir ~/replicate
+
+# unmount the repeatfs mnt
+fusermount -u ~/mnt
+
+# remount with a new directory
 repeatfs mount ~/replicate ~/mnt
 cd ~/mnt
 
-repeatfs replicate ~/results.txt.provenance.json --stdout stdout.log --stderr stderr.log
+ 
+# RepeatFS can also simply list the commands that would be used during replication (using the `-l` argument):
+repeatfs replicate ~/combined-16S.fasta.provenance.json -l
+ 
+# actually repeat the analysis
+#repeatfs replicate ~/combined-16S.fasta.provenance.json --stdout stdout.log --stderr stderr.log
 ```
 
 RepeatFS will execute and verify each step. Version mismatches or other errors will be reported:
 
-RepeatFS can also simply list the commands that would be used during replication (using the `-l` argument):
-
-```
-repeatfs replicate ~/results.txt.provenance.json -l
-```
-
 This will list each command that will be run, in order.  It will also list ID(s) next to each command, which can be used during replication (using the `-e` argument) to reconstruct a missing shell script.
 
-```
-[turing|1591668563.97|1652] wget ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
-[turing|1591668614.24|1695] gzip -d uniprot_sprot.fasta.gz
-[turing|1591668694.23|1756] grep --color=auto > uniprot_sprot.fasta > /tmp/mnt/headers.txt
-[turing|1591669111.77|2165, turing|1591669111.77|2166] cat uniprot_sprot.fasta | wc -l > /tmp/mnt/count.txt
-[turing|1591669123.5|2175] tar -cvf results.tar headers.txt count.txt
-```
+ 
 
 VIRTUAL DYNAMIC FILES
 --
