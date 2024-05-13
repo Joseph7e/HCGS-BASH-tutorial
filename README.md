@@ -16,6 +16,8 @@ SSH is a method of securely communicating with another computer.
 
 ### Connecting to the server
 
+https://mobaxterm.mobatek.net/download.html
+
 [Download putty](https://www.putty.org/)
 
 ![alt text](https://github.com/Joseph7e/HCGS-BASH-tutorial/blob/master/Putty.PNG?raw=true)
